@@ -1,0 +1,59 @@
+index.html<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>focus on the next step</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: rgb(212, 212, 212);
+        }
+        #input-container {
+            padding: 1%;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        (function() {
+            'use strict';
+            // Change theme color
+            var m = document.createElement('meta');
+            m.name = 'theme-color';
+            m.content = '#000000';
+            document.head.appendChild(m);
+        })();
+    </script>
+</head>
+<body>
+    <div id="input-container">
+        <textarea id="input" style="width: 100%; height: 100%; color: rgb(212, 212, 212);"></textarea>
+    </div>
+    <script type="text/javascript">
+        var intervalId = window.setInterval(function(){
+            try {
+                document.getElementById("input").style.width = (window.innerWidth) + "px";
+                document.getElementById("input").style.height = (window.innerHeight) + "px";
+                document.body.style.overflow = 'hidden';
+                document.getElementById("input").style.backgroundColor = "black";
+                document.title = "";
+            }
+            catch (err) {
+            }
+        }, 500);
+        function autoSave() {
+            localStorage.setItem('notepad_text', document.getElementById('input').value);
+        }
+        function autoRetrieve() {
+            if (localStorage.getItem('notepad_text')) {
+                document.getElementById('input').value = localStorage.getItem('notepad_text');
+            }
+        }
+        document.getElementById('input').addEventListener('input', autoSave);
+        autoRetrieve();
+    </script>
+</body>
+</html>
