@@ -42,6 +42,33 @@
                 var emoji = (count++ % 2) ? '👨‍💻' : '🤾‍♀️';
                 input.value += '\n' + emoji;
             }
+            if (e.key === '[' || e.key === ']') {
+                e.preventDefault();
+                var cursorPosition = input.selectionStart;
+                var lines = input.value.split('\n');
+                var currentLine = 0;
+                var newCursorPosition = 0;
+                // Find which line the cursor is on
+                for (var i = 0; i < lines.length; i++) {
+                    if (cursorPosition <= lines.slice(0, i + 1).join('\n').length) {
+                        currentLine = i;
+                        break;
+                    }
+                }
+                // Swap lines and calculate the new cursor position
+                if (currentLine !== 0 && e.key === '[') {
+                    [lines[currentLine], lines[currentLine - 1]] = [lines[currentLine - 1], lines[currentLine]];
+                    newCursorPosition = cursorPosition - (lines[currentLine].length + 1);
+                } else if (currentLine !== lines.length - 1 && e.key === ']') {
+                    [lines[currentLine], lines[currentLine + 1]] = [lines[currentLine + 1], lines[currentLine]];
+                    newCursorPosition = cursorPosition + (lines[currentLine].length + 1);
+                }
+                // Update the textarea value
+                input.value = lines.join('\n');
+                // Set the cursor to the new position
+                input.selectionStart = newCursorPosition;
+                input.selectionEnd = newCursorPosition;
+            }
         });
         var intervalId = window.setInterval(function(){
             try {
