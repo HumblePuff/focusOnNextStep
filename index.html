@@ -11,10 +11,39 @@
             color: rgb(212, 212, 212);
         }
         #input-container {
+            position: relative;
             padding: 1%;
             box-sizing: border-box;
             width: 100%;
             height: 100%;
+        }
+        #a1-character {
+            position: absolute;
+            left: 0;
+            top: 9;
+            padding-left: 9px;
+            z-index: 2;
+        }
+        #a2-character {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding-top: 20px;
+            padding-left: 9px;
+            z-index: 2;
+        }
+        #a3-character {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding-top: 30px;
+            padding-left: 9px;
+            z-index: 2;
+        }
+        #input {
+            position: relative;
+            z-index: 1;
+            padding-left: 30px;
         }
     </style>
     <script type="text/javascript">
@@ -30,21 +59,24 @@
 </head>
 <body>
     <div id="input-container">
+        <div id="a1-character">👨‍💻-</div>
+        <div id="a2-character">🤾‍♀️-</div>
+        <div id="a3-character">----------------------------------------------</div>
         <textarea id="input" style="width: 100%; height: 100%; color: rgb(212, 212, 212);"></textarea>
     </div>
     <script type="text/javascript">
         var input = document.getElementById("input");
         var count = 1; // start with 1
         input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            // Alternate between 👨‍💻 and 🤾‍♀️ for each new line
-            var emoji = (count++ % 2) ? '🔴' : '🔴';
-            var cursorPosition = input.selectionStart;
-            input.value = input.value.slice(0, cursorPosition) + '\n' + emoji + input.value.slice(cursorPosition);
-            input.selectionStart = cursorPosition + 1;
-            input.selectionEnd = cursorPosition + 1;
-        }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                // Alternate between 👨‍💻 and 🤾‍♀️ for each new line
+                var emoji = (count++ % 2) ? '🔴' : '🔴';
+                var cursorPosition = input.selectionStart;
+                input.value = input.value.slice(0, cursorPosition) + '\n' + emoji + input.value.slice(cursorPosition);
+                input.selectionStart = cursorPosition+3;
+                input.selectionEnd = cursorPosition+3;
+            }
             if (e.key === '[' || e.key === ']') {
                 e.preventDefault();
                 var cursorPosition = input.selectionStart;
