@@ -91,6 +91,7 @@
         input.value = input.value.slice(0, cursorPosition) + '\n' + emoji + '\n' + input.value.slice(cursorPosition);
         input.selectionStart = cursorPosition+3;
         input.selectionEnd = cursorPosition+3;
+        autoSave();
     }
             if (e.key === '[' || e.key === ']') {
                 e.preventDefault();
